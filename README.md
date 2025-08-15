@@ -14,6 +14,26 @@ A web application designed for college students to achieve career goals by provi
 - **Reports**: Weekly and monthly performance analytics.
 - **Path Correction**: Guides students back on track if they deviate.
 
+## Screeshots
+
+<table>
+  <tr>
+    <td><img src="Media/1g.png" width="300"></td>
+    <td><img src="Media/2g.png" width="300"></td>
+    <td><img src="Media/3g.png" width="300"></td>
+  </tr>
+  <tr>
+    <td><img src="Media/4g.png" width="300"></td>
+    <td><img src="Media/5g.png" width="300"></td>
+    <td><img src="Media/6g.png" width="300"></td>
+  </tr>
+  <tr>
+    <td><img src="Media/7g.png" width="300"></td>
+    <td><img src="Media/8g.png" width="300"></td>
+  </tr>
+</table>
+
+
 ## 🛠 Tech Stack
 - **Frontend**: HTML, CSS
 - **Backend**: Flask (Python)  

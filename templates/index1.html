@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roadmap Timeline</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/i.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+</head>
+
+<body>
+  <section class="ps-timeline-sec">
+    <div id="lottie-background" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: -1;">
+    </div>
+    <div class="container">
+        <div class="header-container">
+            <h1 class="gradient-text">Roadmap Overview</h1>
+        </div>
+      <div class="hori-timeline" dir="ltr">
+        <ul class="list-inline events">
+          {% for item in timeline_data %}
+          <li class="list-inline-item event-list">
+            <div class="px-4">
+              <div class="event-date bg-soft-primary text-primary">{{ item.phase }}</div>
+              <h5 class="font-size-16">{{ item.title }}</h5>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+    </div>
+    <form action="/roadmap" method="GET">
+        <button class="btn" type="submit">Go to Detailed Roadmap</button>
+    </form>
+  </section>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"></script>
+  <script>
+    var animation = lottie.loadAnimation({
+      container: document.getElementById('lottie-background'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: 'static/json/a5.json'
+    });
+  </script>
+
+</body>
+
+</html>

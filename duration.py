@@ -1,7 +1,7 @@
 import requests
 
 # Your Gemini API key
-GEMINI_API_KEY = 'AIzaSyB335UzzSBBxHj94igOEAThkn_G_uFP9UY'  # Replace with your actual API key
+GEMINI_API_KEY = 'API'  # Replace with your actual API key
 
 def generate_duration_from_gemini(roadmap_content):
     """Send a request to Gemini API to get duration for the roadmap."""

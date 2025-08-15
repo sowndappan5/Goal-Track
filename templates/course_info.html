@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ selected_course }} Details</title>
+</head>
+<body>
+    <h1>Course Information</h1>
+    <p><strong>Topic:</strong> {{ topic }}</p>
+    <p><strong>Subtopic:</strong> {{ subtopic }}</p>
+    <p><strong>Description:</strong> {{ description }}</p>
+    <p><strong>Selected Course:</strong> {{ selected_course }}</p>
+    
+    <a href="{{ url_for('subtopic', subtopic_name=subtopic) }}">Back to Subtopic</a>
+</body>
+</html>

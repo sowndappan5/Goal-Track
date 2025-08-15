@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <title>{{ subtopic }} Details</title>
+</head>
+<body>
+    <div id="lottie-background" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: -1;"></div>
+
+    <h1>{{ topic }} - {{ subtopic }}</h1>
+    <img src="{{ url_for('static', filename='assets/' + image) }}" alt="{{ subtopic }} image" style="width: 300px; height: auto;">
+    <p><strong>Description:</strong> {{ description }}</p>
+    
+    <h3>Contents:</h3>
+    <h3>Contents:</h3>
+<form method="POST" action="">
+    <select name="selected_course" id="course-select">
+        {% for content in contents.split(', ') %}
+            <option value="{{ content }}">{{ content }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Get Course Info</button>
+</form>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"></script>
+<script>
+    var animation = lottie.loadAnimation({
+        container: document.getElementById('lottie-background'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: 'static/json/a5.json'
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,150 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: #f0f5ff;
+    min-height: 100vh; /* Ensure it covers full height */
+    display: flex; /* Set body as a flex container */
+    justify-content: center; /* Center horizontally */
+    align-items: flex-start; /* Align items to the top */
+    padding: 2rem;
+}
+
+.main-container {
+    max-width: 1200px; /* Set a maximum width for the main container */
+    width: 100%; /* Allow it to take full width available */
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+}
+
+.right-container {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 9px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Ensure right container takes full width */
+}
+
+/* Input */
+
+
+select {
+    flex: 1;
+    min-width: 400px;
+    padding: 0.4rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+select:focus {
+    border-color: #512da8;
+    box-shadow: 0 0 0 2px rgba(67, 57, 202, 0.1);
+}
+
+.btn {
+    background: linear-gradient(90deg, #083F9B, #7F56D9);
+    color: white;
+    border: none;
+    padding: 0.4rem 0.9rem; /* Reduced padding for a smaller button */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem; /* Optional: Adjust font size to make it smaller */
+    margin-left: 1rem; /* Add some space between select and button */
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(67, 57, 202, 0.2);
+}
+
+.generate-roadmap-btn {
+    background: linear-gradient(90deg, #083F9B, #7F56D9);
+    color: white;
+    border: none;
+    padding: 0.4rem 0.9rem; /* Consistent padding */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem; /* Same font size as other buttons */
+}
+
+.generate-roadmap-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(67, 57, 202, 0.2);
+}
+
+.backbtn {
+    background-color: #083F9B;
+    color: white;
+    border: none;
+    padding: 0.4rem 0.9rem; /* Reduced padding for a smaller button */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem; /* Optional: Adjust font size to make it smaller */
+    margin-left: 1rem; /* Add some space between select and button */
+}
+
+.backbtn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(67, 57, 202, 0.2);
+}
+
+.details-list {
+    list-style: none;
+}
+
+.detail-item {
+    display: flex;
+    padding: 1rem 30px;
+    border-bottom: 1px solid #e1e8ed;
+    
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: #2b4162;
+    width: 200px;
+    flex-shrink: 0;
+}
+
+.detail-value {
+    color: #666;
+    flex-grow: 1;
+}
+
+.back-link {
+    align-self: flex-end; /* Align link to the right */
+    margin-top: 20px; /* Add some space above the link */
+}
+
+.header-container {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+    text-align: center; /* Center text within each item */
+    margin-bottom: 2rem; /* Space between title and list */
+    gap: 1rem; /* Optional: Add space between the image and the heading */
+}
+
+.gradient-text {
+    background-image: linear-gradient(90deg, #083F9B, #7F56D9); /* Gradient from #4c83fa to #7F56D9 */
+    background-size: 100%; /* Ensure the gradient covers the text */
+    -webkit-background-clip: text; /* Clip the background to the text */
+    -moz-background-clip: text; /* For Firefox */
+    color: transparent; /* Make the text color transparent */
+}
+

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"></script>
+
+    <title>GoalTrack</title>
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='leaderboard.css') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            display: flex; /* Use flexbox to split the screen */
+        }
+        .sidebar {
+            width: 200px; /* Adjust the width of the sidebar */
+            height: 100vh;
+        }
+        .container {
+            flex: 1; /* Let the main content take the remaining space */
+            padding: 20px;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li>
+                <div class="home-icon">
+                  <a href="/dash">
+                    <img src="static/assets/business.png" alt="Home Icon" class="icon" style="height: 30px;"> <!-- Custom Home Icon --></a>
+                    <div class="roof">
+                        <div class="roof-edge"></div>
+                    </div>
+                    <div class="front"></div>
+                </div>
+            </li>
+            <li>
+                <div class="about-icon">
+                  <a href="/analysis">
+                    <img src="static/assets/data-analytics.png" alt="About Icon" class="icon" style="height: 30px;"> <!-- Custom About Icon --></a>
+                    <div class="head">
+                        <div class="eyes"></div>
+                        <div class="beard"></div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="work-icon">
+                  <a href="/LeaderBoard">
+                    <img src="static/assets/podium.png" alt="Work Icon" class="icon" style="height: 30px;"> <!-- Custom Work Icon --></a>
+                    <div class="paper"></div>
+                    <div class="lines"></div>
+                    <div class="lines"></div>
+                </div>
+            </li>
+        </ul>
+        
+    </nav>
+    <style>
+        *,
+        *:before,
+        *:after {
+            box-sizing: border-box;
+        }
+
+        :after {
+            content: "";
+        }
+
+        section {
+            position: relative;
+            left: 100px;
+        }
+
+        h1 {
+            margin: 80px 0 10px 0;
+            font-size: 52px;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-size: 24px;
+        }
+
+        nav {
+            float: left;
+            position: relative;
+            top: 0;
+            left: 0;
+            background: transparent;
+        }
+
+        nav ul {
+            text-align: center;
+            padding-left: 40px;
+        }
+
+        nav ul li {
+            position: relative;
+            width: 70px;
+            cursor: pointer;
+            background: linear-gradient(90deg, #083F9B, #7F56D9);
+            text-transform: uppercase;
+            transition: all .4s ease-out;
+      
+        }
+
+        nav ul li:after {
+            position: absolute;
+            background: white;
+            color: rgb(26, 24, 24);
+            top: 0;
+            left: 70px;
+            width: 70px;
+            height: 100%;
+            opacity: .5;
+            transform: perspective(400px) rotateY(90deg);
+            transform-origin: 0 100%;
+            transition: all .4s ease-out;
+        }
+
+        nav ul li:nth-child(1):after {
+            content: " Dashboard ";
+            line-height: 88px;
+        }
+
+        nav ul li:nth-child(2):after {
+            content: " Analysis ";
+            line-height: 88px;
+        }
+
+        nav ul li:nth-child(3):after {
+            content: " LeaderBoard ";
+            line-height: 85px;
+        }
+
+
+        nav ul li:hover {
+            transform: translateX(-70px);
+        }
+
+        nav ul li:hover:after {
+            opacity: 1;
+            transform: perspective(400px) rotateY(0deg) scale(1);
+        }
+
+
+        nav ul li>div {
+            display: inline-block;
+            padding: 25px 0;
+            background: transparent;
+        }
+
+        nav ul li div {
+            position: relative;
+        }
+    </style>
+    <div class="main-container">
+        <div id="lottie-background"
+            style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: -1;"></div>
+
+
+        <!-- Container 3 : Right Image -->
+        <div class="right-container">
+            <div class="container">
+                <h2>Leaderboard</h2>
+                
+                <!-- Podium for top 3 -->
+                <div class="podium-area">
+                    {% for player in leaderboard_data[:3] %}
+                        {% if player.rank == 2 %}
+                            <div class="podium-player second-place">
+                                <div class="avatar" style="background-color: {{ player.color }}">
+                                    <span>{{ player.initials }}</span>
+                                </div>
+                                <div class="player-name">{{ player.name }}</div>
+                                <div class="podium-rank">{{ player.rank }}</div>
+                                <div class="points">
+                                    <span class="star">★</span> {{ player.score }} pts
+                                </div>
+                            </div>
+                        {% endif %}
+                        
+                        {% if player.rank == 1 %}
+                            <div class="podium-player first-place">
+                                <div class="trophy-icon">🏆</div>
+                                <div class="avatar" style="background-color: {{ player.color }}">
+                                    <span>{{ player.initials }}</span>
+                                </div>
+                                <div class="player-name">{{ player.name }}</div>
+                                <div class="podium-rank">{{ player.rank }}</div>
+                                <div class="points">
+                                    <span class="star">★</span> {{ player.score }} pts
+                                </div>
+                            </div>
+                        {% endif %}
+                        
+                        {% if player.rank == 3 %}
+                            <div class="podium-player third-place">
+                                <div class="avatar" style="background-color: {{ player.color }}">
+                                    <span>{{ player.initials }}</span>
+                                </div>
+                                <div class="player-name">{{ player.name }}</div>
+                                <div class="podium-rank">{{ player.rank }}</div>
+                                <div class="points">
+                                    <span class="star">★</span> {{ player.score }} pts
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                
+                <!-- List for positions 4 and beyond -->
+                <div class="leaderboard-list">
+                    {% for player in leaderboard_data[3:] %}
+                        <div class="leaderboard-item">
+                            <div class="rank-col">{{ player.rank }}</div>
+                            <div class="avatar-col">
+                                <div class="avatar" style="background-color: {{ player.color }}">
+                                    <span>{{ player.initials }}</span>
+                                </div>
+                            </div>
+                            <div class="name-col">{{ player.name }}</div>
+                            <div class="points-col">
+                                <span class="star">★</span> {{ player.score }} pts
+                            </div>
+                            <div class="improvement-col">
+                                {% if player.improvement %}
+                                    <span class="improvement">{{ player.improvement }} <span class="arrow">▲</span></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <script src="{{ url_for('static', filename='leaderboard.js') }}"></script>
+
+            </div>
+
+</body>
+
+</html>

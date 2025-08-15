@@ -4,7 +4,7 @@ import google.generativeai as genai
 import markdown
 
 
-GEMINI_API_KEY = 'AIzaSyB335UzzSBBxHj94igOEAThkn_G_uFP9UY'
+GEMINI_API_KEY = 'API'
 if not GEMINI_API_KEY:
     raise ValueError("Please set the GEMINI_API_KEY environment variable")
 genai.configure(api_key=GEMINI_API_KEY)

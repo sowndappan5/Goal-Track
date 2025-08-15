@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GoalTrack</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/select_domain_result.css') }}">
+</head>
+
+<body>
+  <div class="main-container">
+    <div id="lottie-background" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: -1;"></div>
+
+    <!-- Left Section -->
+    <div class="left-section">
+      <!-- Container 1 : GoalTrack Logo -->
+      <div class="logo-container">
+        <div class="logo">
+          <span class="logo-icon">📚</span>
+          GoalTrack
+        </div>
+      </div>
+
+      <!-- Container 2 : Trending and Search -->
+      <div class="search-trending-container">
+        {% if jobs %}
+                    <ul class="jobs-list">
+                        {% for job in jobs %}
+                            <li class="job-item">
+                                <a href="/job_details/{{ loop.index0 }}" class="job-link"> <!-- Use loop.index0 for zero-based index -->
+                                    <div class="job-card">
+                                        <i class="fas fa-briefcase job-icon"></i>
+                                        <div class="job-info">
+                                            <h3 class="job-title">{{ job['Job'] }}</h3>
+                                            <span class="job-domain">{{ job['Domain'] }}</span>
+                                        </div>
+                                        <i class="fas fa-chevron-right arrow-icon"></i>
+                                    </div>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <div class="no-results">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>No jobs found.</p>
+                    </div>
+                    <div class="navigation">
+                        <a href="/b" class="back-btn">
+                            <i class="fas fa-arrow-left"></i>
+                            Back to Main Menu
+                        </a>
+                    </div>
+                {% endif %}
+    
+      </div>
+      
+    
+    </div>
+    
+    <!-- Container 3 : Right Image -->
+    <div class="right-container">
+      {% if job_details %}
+      <ul class="details-list">
+        {% for key, value in job_details.items() %}
+            <li class="detail-item">
+                <span class="detail-label">{{ key }}</span>
+                <span class="detail-value">
+                    {% if key == 'Coding' %}
+                        {% if value == 1 %}
+                            Coding
+                        {% elif value == 2 %}
+                            Partially Coding
+                        {% elif value == 0 %}
+                            Non Coding
+                        {% else %}
+                            {{ value }}
+                        {% endif %}
+                    {% else %}
+                        {{ value }}
+                    {% endif %}
+                </span>
+            </li>
+        {% endfor %}
+    </ul>
+                    {% else %}
+                    <div class="no-results">
+                        <img src="{{ url_for('static', filename='assets/gojo.png') }}" alt="No results found" style="width: 100%; height:auto;">
+                    </div>
+                {% endif %}
+    </div>
+  </div>
+
+  <script>
+    // Add smooth hover effect to all buttons   
+    document.querySelectorAll('.btn').forEach(button => {
+      button.addEventListener('mouseover', () => {
+        button.style.transform = 'translateY(-2px)';
+      });
+
+      button.addEventListener('mouseout', () => {
+        button.style.transform = 'translateY(0)';
+      });
+    });
+
+    // Add focus effect to search inputs   
+    document.querySelectorAll('input').forEach(input => {
+      input.addEventListener('focus', () => {
+        input.parentElement.style.transform = 'scale(1.01)';
+      });
+
+      input.addEventListener('blur', () => {
+        input.parentElement.style.transform = 'scale(1)';
+      });
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"></script>
+
+  <script> 
+    var animation = lottie.loadAnimation({
+        container: document.getElementById('lottie-background'), // ID of the container
+        renderer: 'svg', // Render as SVG
+        loop: true, // Loop the animation
+        autoplay: true, // Start playing automatically
+        path: 'static/json/a5.json' // Updated path to your Lottie JSON file
+    });
+</script>
+</body>
+
+</html>

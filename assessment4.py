@@ -9,7 +9,7 @@ from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 
 # Set your Gemini API key - in production, use environment variables
-GEMINI_API_KEY = "AIzaSyB335UzzSBBxHj94igOEAThkn_G_uFP9UY"
+GEMINI_API_KEY = "API"
 genai.configure(api_key=GEMINI_API_KEY)
 
 # Cache to store previously generated assessments

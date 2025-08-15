@@ -1,0 +1,139 @@
+body {
+    background: #f0f5ff;
+    min-height: 100vh; /* Ensure it covers full height */
+    display: flex; /* Set body as a flex container */
+    justify-content: center; /* Center horizontally */
+    align-items: flex-start; /* Align items to the top */
+    padding: 2rem;
+}
+
+.hori-timeline .events {
+    border-top: 3px solid #e9ecef;
+}
+
+.hori-timeline .events .event-list {
+    display: block;
+    position: relative;
+    text-align: center;
+    padding-top: 70px;
+    margin-right: 0;
+    width: 100%; /* Ensures full width when wrapping */
+}
+
+.hori-timeline .events .event-list:before {
+    content: "";
+    position: absolute;
+    height: 80px;
+    border-right: 2px solid #083F9B;
+    top: 0;
+}
+
+.hori-timeline .events .event-list .event-date {
+    position: absolute;
+    top: 38px;
+    left: 0;
+    right: 0;
+    width: 80px;
+    margin: 0 auto;
+    border-radius: 4px;
+    padding: 4px 4px;
+}
+
+@media (min-width: 1140px) {
+    .hori-timeline .events .event-list {
+        display: inline-block;
+        width: 24%; /* Adjust the width to your preference */
+        padding-top: 45px;
+    }
+    .hori-timeline .events .event-list .event-date {
+        top: -12px;
+    }
+}
+
+.bg-soft-primary {
+    background: linear-gradient(90deg, #083F9B, #7F56D9);
+}
+
+.card {
+    border: none;
+    margin-bottom: 24px;
+    -webkit-box-shadow: 0 0 13px 0 rgba(236,236,241,.44);
+    box-shadow: 0 0 13px 0 rgba(236,236,241,.44);
+}
+
+/* Flex Layout for the Timeline */
+.hori-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.events {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping of list items */
+    gap: 20px; /* Space between the items */
+    list-style-type: none;
+    padding: 0;
+}
+
+.event-list {
+    flex: 1 1 30%; /* 1: flex-grow, 1: flex-shrink, 30%: initial size */
+    min-width: 280px; /* Minimum width to ensure proper wrapping */
+    box-sizing: border-box;
+}
+
+.event-date {
+    color: #f0f8ff;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.font-size-16 {
+    font-size: 22px;
+    font-weight: normal;
+}
+*{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.btn {
+    background: linear-gradient(90deg, #083F9B, #7F56D9);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    /* Adjust padding if necessary */
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(67, 57, 202, 0.2);
+  }
+
+  .btn.explore {
+    font-size: 1rem;
+    /* Ensured consistent font size */
+  }
+
+  .header-container {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+    text-align: center; /* Center text within each item */
+    margin-bottom: 2rem; /* Space between title and list */
+    gap: 1rem; /* Optional: Add space between the image and the heading */
+}
+
+.gradient-text {
+    background-image: linear-gradient(90deg, #083F9B, #7F56D9); /* Gradient from #4c83fa to #7F56D9 */
+    background-size: 100%; /* Ensure the gradient covers the text */
+    -webkit-background-clip: text; /* Clip the background to the text */
+    -moz-background-clip: text; /* For Firefox */
+    color: transparent; /* Make the text color transparent */
+}

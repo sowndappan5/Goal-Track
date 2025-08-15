@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"></script>
+
+    <title>GoalTrack</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+</head>
+
+<body>
+    <div class="main-container">
+        <div id="lottie-background" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: -1;"></div>
+
+        <!-- Left Section -->
+        <div class="left-section">
+            <!-- Container 1 : GoalTrack Logo -->
+            <div class="logo-container">
+                <div class="logo">
+                    <span class="logo-icon">📚</span>
+                    <span class="gradient-text">GoalTrack</span>
+                </div>
+            </div>
+
+            <!-- Container 2 : Trending and Search -->
+            <div class="search-trending-container">
+                <div class="trending">
+                    <div class="trending-container">
+                      <h2>Trending <span class="gradient-text">Domains</span></h2>
+
+                        <form action="/trending_domains" method="POST">
+                            <button type="submit" class="b">
+                                Explore
+                                <div class="star-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1"
+                                        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                                        viewBox="0 0 784.11 815.53" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <defs></defs>
+                                        <g id="Layer_x0020_1">
+                                            <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                            <path class="fil0"
+                                                d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z">
+                                            </path>
+                                        </g>
+                                    </svg>
+                                </div>
+                                <div class="star-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1"
+                                        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                                        viewBox="0 0 784.11 815.53" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <defs></defs>
+                                        <g id="Layer_x0020_1">
+                                            <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                            <path class="fil0"
+                                                d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z">
+                                            </path>
+                                        </g>
+                                    </svg>
+                                </div>
+                                <div class="star-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1"
+                                        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                                        viewBox="0 0 784.11 815.53" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <defs></defs>
+                                        <g id="Layer_x0020_1">
+                                            <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                            <path class="fil0"
+                                                d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z">
+                                            </path>
+                                        </g>
+                                    </svg>
+                                </div>
+                                <div class="star-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1"
+                                        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                                        viewBox="0 0 784.11 815.53" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <defs></defs>
+                                        <g id="Layer_x0020_1">
+                                            <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                            <path class="fil0"
+                                                d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z">
+                                            </path>
+                                        </g>
+                                    </svg>
+                                </div>
+                                <div class="star-5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1"
+                                        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                                        viewBox="0 0 784.11 815.53" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <defs></defs>
+                                        <g id="Layer_x0020_1">
+                                            <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                            <path class="fil0"
+                                                d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z">
+                                            </path>
+                                        </g>
+                                    </svg>
+                                </div>
+                                <div class="star-6">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1"
+                                        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                                        viewBox="0 0 784.11 815.53" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <defs></defs>
+                                        <g id="Layer_x0020_1">
+                                            <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                            <path class="fil0"
+                                                d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z">
+                                            </path>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Ensure both buttons have the same size -->
+
+                </div>
+
+                <div class="search-section">
+                    <div class="search-box">
+                        <form action="/specific_domain" method="POST">
+                            <input type="text" name="domain_name" placeholder="Search by Domain">
+
+                            <button type="submit" class="btn">Search</button>
+                        </form>
+                    </div>
+
+
+                    <div class="search-box">
+                        <form action="/specific_job" method="POST">
+                            <input type="text" name="job_title" placeholder="Search by Job Title">
+                            <button class="btn">Search</button>
+                        </form>
+                    </div>
+
+                    <div class="search-box">
+                        <form action="/specific_skills" method="POST">
+                            <input type="text" name="skills" placeholder="Search by Skills">
+                            <button class="btn">Search</button>
+                        </form>
+                    </div>
+
+                    <div class="search-box">
+                        <form action="/specific_salary" method="POST">
+                            <select name="salary">
+                                {% for salary_range, count in salary_options.items() %}
+                                    <option value="{{ salary_range }}">
+                                        {% if count is none %}
+                                            {{ salary_range }}  <!-- Display without job count -->
+                                        {% else %}
+                                            {{ salary_range }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ count }} jobs<!-- Display with job count -->
+                                        {% endif %}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                            <button class="btn">Search</button>
+                        </form>
+                    </div>
+                    
+                </div>
+
+            </div>
+            <div class="courses-logo-container">
+              <div class="courses-logo">
+                  <span class="courses-logo-icon">📚</span>
+                  Courses
+              </div>
+              <form action="/course" method="GET" class="courses-explore">
+                  <button type="submit" class="btn">Explore</button>
+              </form>
+          </div>
+          
+
+
+        </div>
+
+        <!-- Container 3 : Right Image -->
+        <div class="right-container">
+            {% if domains %}
+            <ul class="domains-list">
+                {% for domain in domains %}
+                <li class="domain-item">
+                    <a href="/select_domain/{{ domain['Trending domains'] }}" class="card">
+                        <div class="card-front">
+                            <img src="{{ url_for('static', filename='assets/' + domain['Image']) }}"
+                                alt="{{ domain['Trending domains'] }} image" class="domain-image">
+                            <h3 class="domain-title">{{ domain['Trending domains'] }}</h3>
+                        </div>
+                        <div class="card-back">
+                            <p class="domain-description">{{ domain['Description'] }}</p>
+                        </div>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% elif jobs %}
+            <ul class="jobs-list">
+                {% for job in jobs %}
+                <li class="job-item">
+                    <a href="/job_details/{{ job['index'] }}" class="job-link">
+                        <div class="job-card">
+                            <i class="fas fa-briefcase job-icon"></i>
+                            <div class="job-info">
+                                <h3 class="job-title">{{ job['Job'] }}</h3>
+                                <span class="job-domain">{{ job['Domain'] }}</span>
+                            </div>
+                            <i class="fas fa-chevron-right arrow-icon"></i>
+                        </div>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% elif topics %}
+            <div class="topics-container">
+              {% for topic in topics %}
+                  <h3 class="gradient-text">{{ topic['Topic'] }}</h3> <!-- Heading with gradient -->
+                  <div class="subtopics-container">
+                      {% for subtopic in topic['Subtopics'] %}
+                          <div class="subtopic-box">
+                              <a href="{{ url_for('subtopic', subtopic_name=subtopic) }}">{{ subtopic }}</a>
+                          </div> <!-- Each subtopic in a rectangle -->
+                      {% endfor %}
+                  </div>
+              {% endfor %}
+          </div>
+          
+
+            {% else %}
+            <div class="no-results" style="height: 400px; display: flex; align-items: center; justify-content: center;">
+                <img src="{{ url_for('static', filename='assets/gojo.jpg') }}" alt="No results found"
+                    style="width: 100%; height:auto;">
+            </div>
+            {% endif %}
+        </div>
+
+
+    </div>
+
+    <script>
+        // Add smooth hover effect to all buttons   
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('mouseover', () => {
+                button.style.transform = 'translateY(-2px)';
+            });
+
+            button.addEventListener('mouseout', () => {
+                button.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Add focus effect to search inputs   
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.style.transform = 'scale(1.01)';
+            });
+
+            input.addEventListener('blur', () => {
+                input.parentElement.style.transform = 'scale(1)';
+            });
+        });
+        var animation = lottie.loadAnimation({
+            container: document.getElementById('lottie-background'), // ID of the container
+            renderer: 'svg', // Render as SVG
+            loop: true, // Loop the animation
+            autoplay: true, // Start playing automatically
+            path: '../static/json/a5.json' // Updated path to your Lottie JSON file
+        });
+    </script>
+</body>
+
+</html>

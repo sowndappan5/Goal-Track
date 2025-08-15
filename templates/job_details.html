@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/job.css') }}">
+        
+    
+</head>
+
+<body>
+    <div class="main-container">
+        <div id="lottie-background" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: -1;"></div>
+
+        <div class="right-container">
+            {% if job_details %}
+            <div class="header-container">
+                <h1 class="gradient-text">Job Details</h1>
+            </div>
+            <ul class="details-list">
+                {% for key, value in job_details.items() %}
+                <li class="detail-item">
+                    <span class="detail-label">{{ key }}</span>
+                    <span class="detail-value">
+                        {% if key == 'Coding' %}
+                            {% if value == 1 %}
+                                Coding
+                            {% elif value == 2 %}
+                                Partially Coding
+                            {% elif value == 0 %}
+                                Non Coding
+                            {% else %}
+                                {{ value }}
+                            {% endif %}
+                        {% else %}
+                            {{ value }}
+                        {% endif %}
+                    </span>
+                </li>
+                {% endfor %}
+            </ul>
+    
+            {% elif topic and subtopic %}
+            <div class="header-container">
+                <img src="{{ url_for('static', filename='assets/icons/' + image) }}" alt="{{ subtopic }} image" style="width: 35px; height: 35px;">
+                <h1 class="gradient-text">{{ subtopic }}</h1>
+            </div>
+    
+            <ul class="details-list">
+                <li class="detail-item">
+                    <span class="detail-label">Category:</span>
+                    <span class="detail-value">{{ topic }}</span>
+                </li>
+                <li class="detail-item">
+                    <span class="detail-label">Description:</span>
+                    <span class="detail-value">{{ description }}</span>
+                </li>
+                <li class="detail-item">
+                    <span class="detail-label">Contents:</span>
+                    <span class="detail-value">
+                        <form method="POST" action="">
+                            <select name="selected_course" id="course-select">
+                                {% for content in contents.split(', ') %}
+                                    <option value="{{ content }}">{{ content }}</option>
+                                {% endfor %}
+                            </select>
+                            <form action="/index1" method="GET" style="margin-top: -30px; align-self: flex-end;" >
+                                <input type="hidden" name="topic" value="{{topic}}">
+                                <input type="hidden" name="description" value="{{ description }}">
+                                <input type="hidden" name="job" value="{{ subtopic }}">
+                                <input type="hidden" name="selected" value="{{ selected_course }}">
+                                <button type="submit" class="btn">Get Course Info</button>
+                            </form>
+                        </form>
+                    </span>
+                </li>
+            </ul>
+    
+            {% else %}
+                <h2>No Content</h2> <!-- Fallback message if topic or subtopic is not available -->
+            {% endif %}
+        </div>
+    
+        <!-- Back to Main Menu button -->
+        <a href="/home" class="back-link"><button type="submit" class="backbtn">Back to Main Menu</button></a>
+    
+        
+        {% if job_details %}
+         <!-- New Generate Roadmap button -->
+        <form action="/index1" method="GET" style="margin-top: -30px; align-self: flex-start;" >
+            <input type="hidden" name="domain" value="{{ job_details['Domain'] }}">
+            <input type="hidden" name="job" value="{{ job_details['Job'] }}">
+            <button type="submit" class="generate-roadmap-btn">Generate Roadmap</button>
+        </form>
+        {% endif %}
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"></script>
+<script>
+    var animation = lottie.loadAnimation({
+        container: document.getElementById('lottie-background'), // ID of the container
+        renderer: 'svg', // Render as SVG
+        loop: true, // Loop the animation
+        autoplay: true, // Start playing automatically
+        path: '../static/json/a5.json' // Updated path to your Lottie JSON file
+    });
+</script>
+
+</body>
+
+</html>

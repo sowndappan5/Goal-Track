@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Tracker with Streak</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+        }
+        .task-container {
+            flex: 1;
+        }
+        .streak-container {
+            flex: 1;
+            margin-left: 20px;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 8px 12px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        #contribution-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 20px);
+            gap: 2px;
+            margin-top: 20px;
+        }
+        .cell {
+            width: 20px;
+            height: 20px;
+            border-radius: 2px;
+        }
+        .cell.level-0 { background-color: #ebedf0; }
+        .cell.level-1 { background-color: #c6e48b; }
+        .cell.level-2 { background-color: #7bc96f; }
+        .cell.level-3 { background-color: #239a3b; }
+        .cell.level-4 { background-color: #196127; }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="task-container">
+            <h2>Select a Day</h2>
+            <div id="buttons"></div>
+            <div id="taskContainer"></div>
+        </div>
+        <div class="streak-container">
+            <h2>Daily Streak 🔥</h2>
+            <div id="contribution-grid"></div>
+        </div>
+    </div>
+
+    <script>
+        let streakData = new Array(30).fill(0); // Initialize streak data for 30 days
+
+        async function fetchTasks() {
+            const response = await fetch('/tasks');
+            const tasks = await response.json();
+            const buttonsDiv = document.getElementById('buttons');
+
+            tasks.forEach(task => {
+                let btn = document.createElement('button');
+                btn.textContent = `Day ${task.day}`;
+                btn.onclick = () => showTask(task);
+                buttonsDiv.appendChild(btn);
+            });
+        }
+
+        function showTask(task) {
+            const container = document.getElementById('taskContainer');
+            let taskHTML = `<div class="card">
+                    <h3>${task.head}</h3>
+                    <h4>${task.subhead}</h4>`;
+
+            if (task.topics.length > 0) {
+                taskHTML += `<h5>Topics:</h5>
+                    <p>${task.topics.join("<br>")}</p>`;
+            }
+
+            // If there are tasks, display them; otherwise, show the assessment button.
+            if (task.tasks.length > 0) {
+                taskHTML += `<h5>🎯 Tasks:</h5>
+                    <ul>
+                        ${task.tasks.map((t, index) =>
+                            `<li>
+                                <input type="checkbox" id="task${task.day}_${index}" onchange="saveProgress(${task.day}, ${index})"> 
+                                ${t.task}
+                            </li>`
+                        ).join('')}
+                    </ul>`;
+            } else {
+                taskHTML += `<button onclick="takeAssessment(${task.day})">Take Assessment</button>`;
+            }
+            taskHTML += `</div>`;
+            container.innerHTML = taskHTML;
+            loadProgress(task.day);
+        }
+
+        // Modified takeAssessment to redirect to assessment4.html with the day parameter.
+        function takeAssessment(day) {
+            window.location.href = `assessment4.html?day=${day}`;
+        }
+
+        function saveProgress(day, index) {
+            let checkbox = document.getElementById(`task${day}_${index}`);
+            let progress = JSON.parse(localStorage.getItem("progress")) || {};
+            if (!progress[day]) progress[day] = [];
+            progress[day][index] = checkbox.checked;
+            localStorage.setItem("progress", JSON.stringify(progress));
+
+            updateStreak(day);
+        }
+
+        function loadProgress(day) {
+            let progress = JSON.parse(localStorage.getItem("progress")) || {};
+            if (progress[day]) {
+                progress[day].forEach((checked, index) => {
+                    let checkbox = document.getElementById(`task${day}_${index}`);
+                    if (checkbox) checkbox.checked = checked;
+                });
+            }
+        }
+
+        function updateStreak(day) {
+            let progress = JSON.parse(localStorage.getItem("progress")) || {};
+            if (progress[day]) {
+                streakData[day - 1] = progress[day].filter(checked => checked).length;
+            } else {
+                streakData[day - 1] = 0;
+            }
+            renderStreak();
+        }
+
+        function renderStreak() {
+            const grid = document.getElementById("contribution-grid");
+            grid.innerHTML = '';
+
+            streakData.forEach((count, index) => {
+                const cell = document.createElement("div");
+                cell.classList.add("cell");
+
+                // Determine activity level based on count.
+                const level = getActivityLevel(count);
+                cell.classList.add(`level-${level}`);
+
+                grid.appendChild(cell);
+            });
+        }
+
+        function getActivityLevel(count) {
+            if (count === 0) return 0;
+            if (count <= 1) return 1;
+            if (count <= 2) return 2;
+            if (count <= 3) return 3;
+            return 4;
+        }
+
+        fetchTasks();
+        renderStreak();
+    </script>
+</body>
+</html>

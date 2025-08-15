@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"></script>
+
+    <title>GoalTrack</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <style>
+        /* New styles for the overlay menubar */
+        .overlay-menubar {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+        }
+
+        .task-container {
+            flex: 1;
+        }
+
+        .streak-container {
+            flex: 1;
+            margin-left: 20px;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            padding: 8px 12px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        #contribution-grid {
+            display: grid;
+            grid-template-columns: repeat(15, 30px);
+            gap: 2px;
+            margin-top: 20px;
+        }
+
+        .cell {
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+        }
+
+        .cell.level-0 {
+            background-color: #ebedf0;
+        }
+
+        .cell.level-1 {
+            background-color: #c6e48b;
+        }
+
+        .cell.level-2 {
+            background-color: #7bc96f;
+        }
+
+        .cell.level-3 {
+            background-color: #239a3b;
+        }
+
+        .cell.level-4 {
+            background-color: #196127;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <ul>
+            <li>
+                <div class="home-icon">
+                  <a href="/dash">
+                    <img src="static/assets/business.png" alt="Home Icon" class="icon" style="height: 30px;"> <!-- Custom Home Icon --></a>
+                    <div class="roof">
+                        <div class="roof-edge"></div>
+                    </div>
+                    <div class="front"></div>
+                </div>
+            </li>
+            <li>
+                <div class="about-icon">
+                  <a href="/analysis">
+                    <img src="static/assets/data-analytics.png" alt="About Icon" class="icon" style="height: 30px;"> <!-- Custom About Icon --></a>
+                    <div class="head">
+                        <div class="eyes"></div>
+                        <div class="beard"></div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="work-icon">
+                  <a href="/LeaderBoard">
+                    <img src="static/assets/podium.png" alt="Work Icon" class="icon" style="height: 30px;"> <!-- Custom Work Icon --></a>
+                    <div class="paper"></div>
+                    <div class="lines"></div>
+                    <div class="lines"></div>
+                </div>
+            </li>
+        </ul>
+        
+    </nav>
+    <style>
+        *,
+        *:before,
+        *:after {
+            box-sizing: border-box;
+        }
+
+        :after {
+            content: "";
+        }
+
+        section {
+            position: relative;
+            left: 100px;
+        }
+
+        h1 {
+            margin: 80px 0 10px 0;
+            font-size: 52px;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-size: 24px;
+        }
+
+        nav {
+            float: left;
+            position: relative;
+            top: 0;
+            left: 0;
+            background: transparent;
+        }
+
+        nav ul {
+            text-align: center;
+            padding-left: 40px;
+        }
+
+        nav ul li {
+            position: relative;
+            width: 70px;
+            cursor: pointer;
+            background: linear-gradient(90deg, #083F9B, #7F56D9);
+            text-transform: uppercase;
+            transition: all .4s ease-out;
+      
+        }
+
+        nav ul li:after {
+            position: absolute;
+            background: white;
+            color: rgb(39, 32, 33);
+            top: 0;
+            left: 70px;
+            width: 70px;
+            height: 100%;
+            opacity: .5;
+            transform: perspective(400px) rotateY(90deg);
+            transform-origin: 0 100%;
+            transition: all .4s ease-out;
+        }
+
+        nav ul li:nth-child(1):after {
+            content: " Dashboard ";
+            line-height: 88px;
+        }
+
+        nav ul li:nth-child(2):after {
+            content: " Analysis ";
+            line-height: 88px;
+        }
+
+        nav ul li:nth-child(3):after {
+            content: " LeaderBoard ";
+            line-height: 85px;
+        }
+
+
+        nav ul li:hover {
+            transform: translateX(-70px);
+        }
+
+        nav ul li:hover:after {
+            opacity: 1;
+            transform: perspective(400px) rotateY(0deg) scale(1);
+        }
+
+
+        nav ul li>div {
+            display: inline-block;
+            padding: 25px 0;
+            background: transparent;
+        }
+
+        nav ul li div {
+            position: relative;
+        }
+    </style>
+
+    <script>
+        function saveNote() {
+            let noteText = document.getElementById("noteInput").value;
+
+            if (!noteText.trim()) {
+                alert("Please write a note before submitting.");
+                return;
+            }
+
+            fetch('/save_note', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ note: noteText })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("noteInput").value = "";  // Reset input
+                    displayNotes(data.notes);
+                });
+        }
+
+        function displayNotes(notes) {
+            let notesList = document.getElementById("notesList");
+            notesList.innerHTML = "";  // Clear list
+
+            notes.forEach(note => {
+                let li = document.createElement("li");
+                li.textContent = `${note.day}: ${note.note}`;
+                notesList.appendChild(li);
+            });
+        }
+    </script>
+    <div class="main-container">
+        <div id="lottie-background"
+            style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: -1;"></div>
+
+        <!-- Left Section -->
+        <div class="left-section">
+            <!-- Container 1 : GoalTrack Logo -->
+            <div class="logo-container">
+                <div class="streak-container">
+                    <h2>Daily Streak 🔥</h2>
+                    <div id="contribution-grid"></div>
+                </div>
+            </div>
+
+            <!-- Container 2 : Trending and Search -->
+            <div class="search-trending-container">
+                <div class="trending">
+                    <div class="trending-container">
+                        <h2>Daily <span class="gradient-text">Note</span></h2>
+                        <textarea id="noteInput" placeholder="Write your note here..."></textarea>
+                        <button onclick="saveNote()">Submit</button>
+                        <ul id="notesList"></ul> <!-- Display saved notes -->
+
+                    </div>
+
+                    <!-- Ensure both buttons have the same size -->
+
+                </div>
+
+                <div class="search-section">
+                    <div class='daily-note' style='min-height: 150px;'>
+                        <!-- Content goes here -->
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="courses-logo-container">
+                <div class="courses-logo">
+                    <span class="courses-logo-icon">📚</span>
+                    Courses
+                </div>
+                <form action="/course" method="GET" class="courses-explore">
+                    <button type="submit" class="btn">Explore</button>
+                </form>
+            </div>
+
+
+
+        </div>
+
+        <!-- Container 3 : Right Image -->
+        <div class="right-container">
+            <h2>Day <span id="currentDay">1</span></h2>
+            <div class="nav-buttons">
+                <button onclick="prevDay()">⬅️ Previous</button>
+                <button onclick="nextDay()">Next ➡️</button>
+            </div>
+            <div id="taskContainer" class="task-card">
+                <!-- Tasks will be dynamically inserted here -->
+            </div>
+        </div>
+        <style>
+            .right-container {
+                width: 50%;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: left;
+            }
+
+            .right-container {
+                width: 100%;
+                max-width: 600px;
+                background: white;
+                border-radius: 10px;
+                box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+                text-align: left;
+                justify-content: left;
+            }
+
+            .nav-buttons {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 15px;
+            }
+
+            .task-card {
+                padding: 15px;
+                border-radius: 10px;
+                background: #f9f9f9;
+                text-align: left;
+            }
+
+            .task-card h3 {
+                color: #333;
+                margin-bottom: 5px;
+
+            }
+
+            .task-card ul {
+                list-style-type: none;
+                padding: 0;
+            }
+
+            .task-card ul li {
+                margin: 8px 0;
+                padding: 8px;
+                background: #fff;
+                border-radius: 5px;
+                box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+            }
+        </style>
+
+        <script>
+            let currentDay = 1;
+            let tasks = [];
+            let streakData = new Array(30).fill(0);
+
+            async function fetchTasks() {
+                const response = await fetch('/tasks');
+                tasks = await response.json();
+                showTask(currentDay);
+            }
+
+            function showTask(day) {
+                const container = document.getElementById('taskContainer');
+                document.getElementById("currentDay").textContent = day;
+                let task = tasks.find(t => t.day === day);
+
+                if (!task) {
+                    container.innerHTML = "<p>No tasks available for this day.</p>";
+                    return;
+                }
+
+                let taskHTML = `<div class="task-card">
+        <h3 style="text-align: center;">${task.subhead}</h3>`;
+
+                if (task.topics.length > 0) {
+                    taskHTML += `<h5><b>📚 Topics:</b></h5>
+        <p>${task.topics.join("<br>")}</p>`;
+                }
+
+                if (task.tasks.length > 0) {
+                    taskHTML += `<h5><b>🎯 Tasks:</b></h5>
+        <ul class="compact-list">`;
+
+                    task.tasks.forEach((t, index) => {
+                        taskHTML += `
+                <li class="task-item">
+                    <input type="checkbox" id="task${day}_${index}" onchange="saveProgress(${day}, ${index})">
+                    <label for="task${day}_${index}">${t.task}</label>
+                </li>`;
+                    });
+
+                    taskHTML += `</ul>`;
+                } else {
+                    taskHTML += `<button onclick="takeAssessment(${day})">Take Assessment</button>`;
+                }
+
+                taskHTML += `</div>`;
+                container.innerHTML = taskHTML;
+                loadProgress(day);
+            }
+
+            function prevDay() {
+                if (currentDay > 1) {
+                    currentDay--;
+                    showTask(currentDay);
+                }
+            }
+
+            function nextDay() {
+                if (currentDay < 30) {
+                    currentDay++;
+                    showTask(currentDay);
+                }
+            }
+
+            function takeAssessment(day) {
+                window.location.href = `assessment4.html?day=${day}`;
+            }
+        </script>
+
+    </div>
+
+    <script>
+        // Add smooth hover effect to all buttons   
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('mouseover', () => {
+                button.style.transform = 'translateY(-2px)';
+            });
+
+            button.addEventListener('mouseout', () => {
+                button.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Add focus effect to search inputs   
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.style.transform = 'scale(1.01)';
+            });
+
+            input.addEventListener('blur', () => {
+                input.parentElement.style.transform = 'scale(1)';
+            });
+        });
+        var animation = lottie.loadAnimation({
+            container: document.getElementById('lottie-background'), // ID of the container
+            renderer: 'svg', // Render as SVG
+            loop: true, // Loop the animation
+            autoplay: true, // Start playing automatically
+            path: '../static/json/a5.json' // Updated path to your Lottie JSON file
+        });
+    </script>
+
+    <script>
+
+        function saveProgress(day, index) {
+            let checkbox = document.getElementById(`task${day}_${index}`);
+            let progress = JSON.parse(localStorage.getItem("progress")) || {};
+            if (!progress[day]) progress[day] = [];
+            progress[day][index] = checkbox.checked;
+            localStorage.setItem("progress", JSON.stringify(progress));
+
+            updateStreak(day);
+        }
+
+        function loadProgress(day) {
+            let progress = JSON.parse(localStorage.getItem("progress")) || {};
+            if (progress[day]) {
+                progress[day].forEach((checked, index) => {
+                    let checkbox = document.getElementById(`task${day}_${index}`);
+                    if (checkbox) checkbox.checked = checked;
+                });
+            }
+        }
+
+        function updateStreak(day) {
+            let progress = JSON.parse(localStorage.getItem("progress")) || {};
+            if (progress[day]) {
+                streakData[day - 1] = progress[day].filter(checked => checked).length;
+            } else {
+                streakData[day - 1] = 0;
+            }
+            renderStreak();
+        }
+
+        function renderStreak() {
+            const grid = document.getElementById("contribution-grid");
+            grid.innerHTML = '';
+
+            streakData.forEach((count, index) => {
+                const cell = document.createElement("div");
+                cell.classList.add("cell");
+
+                // Determine activity level based on count.
+                const level = getActivityLevel(count);
+                cell.classList.add(`level-${level}`);
+
+                grid.appendChild(cell);
+            });
+        }
+
+        function getActivityLevel(count) {
+            if (count === 0) return 0;
+            if (count <= 1) return 1;
+            if (count <= 2) return 2;
+            if (count <= 3) return 3;
+            return 4;
+        }
+
+        fetchTasks();
+        renderStreak();
+    </script>
+</body>
+
+</html>

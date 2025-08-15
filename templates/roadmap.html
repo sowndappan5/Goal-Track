@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detailed Roadmap</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/roadmap.css') }}">
+</head>
+<body class="main-container">
+    <div class="container">
+        <div class="markdown-content">
+            {{ roadmap_content | safe }}
+        </div>
+        <form action="/schedule" method="GET">
+            <button class="submit-btn" type="submit">Go to learning schedule</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,256 @@
+/* General styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f9f9f9;
+    background-image: radial-gradient(#e6e6e6 1px, transparent 1px);
+    background-size: 20px 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 90%;
+    max-width: 900px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin: 20px 0;
+}
+
+h1 {
+    text-align: left;
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/* Avatar styling */
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Podium area */
+.podium-area {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-bottom: 40px;
+    position: relative;
+    height: 250px;
+}
+
+.podium-player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 33%;
+    padding-top: 20px;
+}
+
+.first-place {
+    z-index: 3;
+    height: 100%;
+}
+
+.second-place {
+    z-index: 2;
+    height: 85%;
+}
+
+.third-place {
+    z-index: 1;
+    height: 70%;
+}
+
+.podium-player .avatar {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.first-place .avatar {
+    width: 75px;
+    height: 75px;
+    font-size: 30px;
+}
+
+.trophy-icon {
+    position: absolute;
+    top: -15px;
+    font-size: 24px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.player-name {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 5px;
+    color: #333;
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.podium-rank {
+    font-size: 44px;
+    font-weight: bold;
+    color: #dfefca;
+    text-shadow: 1px 1px 0 #a3d645;
+    margin-bottom: 5px;
+}
+
+.first-place .podium-rank {
+    font-size: 60px;
+}
+
+.points {
+    background-color: #f4f4f4;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #444;
+}
+
+.star {
+    color: #ffd700;
+    margin-right: 3px;
+}
+
+/* Leaderboard list */
+.leaderboard-list {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.leaderboard-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+}
+
+.leaderboard-item:last-child {
+    border-bottom: none;
+}
+
+.leaderboard-item:hover {
+    background-color: #f0f0f0;
+}
+
+.rank-col {
+    width: 30px;
+    font-weight: bold;
+    color: #888;
+    font-size: 18px;
+}
+
+.avatar-col {
+    margin-right: 15px;
+}
+
+.avatar-col .avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+}
+
+.name-col {
+    flex-grow: 1;
+    font-weight: 500;
+    color: #333;
+}
+
+.points-col {
+    margin-right: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #555;
+}
+
+.improvement-col {
+    width: 60px;
+    text-align: right;
+}
+
+.improvement {
+    color: #4caf50;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.arrow {
+    font-size: 12px;
+}
+
+/* Animation */
+@keyframes slideIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.podium-player, .leaderboard-item {
+    animation: slideIn 0.5s ease-out forwards;
+}
+
+.first-place {
+    animation-delay: 0.1s;
+}
+
+.second-place {
+    animation-delay: 0.2s;
+}
+
+.third-place {
+    animation-delay: 0.3s;
+}
+
+.leaderboard-item:nth-child(1) {
+    animation-delay: 0.4s;
+}
+
+.leaderboard-item:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.leaderboard-item:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.leaderboard-item:nth-child(4) {
+    animation-delay: 0.7s;
+}
+
+.leaderboard-item:nth-child(5) {
+    animation-delay: 0.8s;
+}

@@ -1,0 +1,709 @@
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  body {
+    background: #f0f5ff;
+    min-height: 100vh;
+    /* Ensure it covers full height */
+    display: flex;
+    /* Set body as a flex container */
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    padding: 2rem;
+  }
+
+  .main-container {
+    max-width: 1200px;
+    /* Set a maximum width for the main container */
+    width: 100%;
+    /* Allow it to take full width available */
+    display: flex;
+    gap: 2rem;
+  }
+
+
+  .left-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+
+  .search-trending-container,
+  .right-container {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 7px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .logo-container {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 7px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+
+  .trending-container {
+    background-color: #e6f0ff;
+    /* Blue color */
+    color: white;
+    /* Text color */
+    padding: 1rem;
+    /* Padding around the content */
+    border-radius: 10px;
+    /* Rounded corners */
+    display: flex;
+    /* Flexbox for alignment */
+    align-items: center;
+    /* Center items vertically */
+    justify-content: space-between;
+    /* Space between items */
+    margin-bottom: 1.5rem;
+    /* Space below this container */
+    flex-grow: 1;
+    /* Allow this container to grow and fill available space */
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    color: #512da8;
+    font-weight: bold;
+  }
+
+  .logo-icon {
+    background: #512da8;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 8px;
+  }
+
+  .search-trending-container {
+    display: flex;
+    /* Make it a flex container */
+    flex-direction: column;
+    /* Column layout for inner elements */
+  }
+
+  .trending {
+    display: flex;
+    /* Keep trending as a flex container */
+    align-items: center;
+    /* Center items vertically */
+    justify-content: space-between;
+    /* Space between trending section and explore button */
+  }
+
+  .trending h2 {
+    color: #333;
+    font-size: 1.2rem;
+  }
+
+  .search-box {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+  }
+
+  .search-box:last-child {
+    margin-bottom: 0;
+  }
+
+  input {
+    flex: 1;
+    min-width: 400px;
+    /* You may want to adjust this for mobile */
+    padding: 0.8rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+
+  input:focus {
+    border-color: #512da8;
+    box-shadow: 0 0 0 2px rgba(67, 57, 202, 0.1);
+  }
+
+  .btn {
+    background: linear-gradient(90deg, #083F9B, #7F56D9);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    /* Adjust padding if necessary */
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(67, 57, 202, 0.2);
+  }
+
+  .btn.explore {
+    font-size: 1rem;
+    /* Ensured consistent font size */
+  }
+
+  select {
+    flex: 1;
+    min-width: 400px;
+    padding: 0.8rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+select:focus {
+    border-color: #512da8;
+    box-shadow: 0 0 0 2px rgba(67, 57, 202, 0.1);
+}
+
+  /* Mobile Styles */
+  @media (max-width: 768px) {
+    .search-box {
+      flex-direction: column;
+      /* Stack input and button vertically */
+      width: 100%;
+      /* Full width */
+      margin-bottom: 1rem;
+      /* Space between search boxes */
+    }
+
+    input {
+      min-width: auto;
+      /* Remove min-width for better fit */
+      width: calc(100% - 10px);
+      /* Full width minus some padding */
+      padding: 0.6rem;
+      /* Adjust padding for mobile */
+      font-size: 0.9rem;
+      /* Slightly smaller font size */
+    }
+
+    .btn {
+      width: auto;
+      /* Allow button to fit content */
+      padding: 0.6rem;
+      /* Adjust button padding for mobile */
+      font-size: 0.9rem;
+      /* Slightly smaller font size */
+      margin-top: 0.5rem;
+      /* Space between input and button */
+    }
+  }
+
+
+  .right-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 600px;
+    /* Set a minimum height */
+  }
+
+
+  .right-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+
+  .courses-logo-container {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    /* Flexbox for alignment */
+  }
+
+  .courses-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-grow: 1;
+    /* Allow this section to take available space */
+  }
+
+  .courses-logo-icon {
+    font-size: 1.5rem;
+    /* Adjust icon size if needed */
+  }
+
+  .courses-explore {
+    margin-left: auto;
+    /* Pushes the button to the right */
+  }
+
+
+  @media (max-width :768px) {
+    .main-container {
+      flex-direction: column;
+    }
+  }
+
+
+  /* From Uiverse.io by opMorn */
+  .b {
+    position: relative;
+    padding: 1rem 2rem;
+    background: linear-gradient(90deg, #083F9B, #7F56D9);
+    /* Gradient background */
+    color: white;
+    /* Text color */
+    font-size: 15px;
+    font-weight: 500;
+    border: 3px solid #4c83fa;
+    border-radius: 8px;
+    box-shadow: 0 0 0 #ffffff;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+
+  .star-1 {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    width: 25px;
+    height: auto;
+    z-index: -5;
+    transition: all 1s cubic-bezier(0.05, 0.83, 0.43, 0.96);
+  }
+
+  .star-2 {
+    position: absolute;
+    top: 45%;
+    left: 25%;
+    width: 15px;
+    height: auto;
+    z-index: -5;
+    transition: all 1scubic-bezier(0, 0.4, 0, 1.01);
+  }
+
+  .star-3 {
+    position: absolute;
+    top: 40%;
+    left: 20%;
+    width: 5px;
+    height: auto;
+    z-index: -5;
+    transition: all 1s cubic-bezier(0, 0.4, 0, 1.01);
+  }
+
+  .star-4 {
+    position: absolute;
+    top: 20%;
+    left: 0%;
+    width: 8px;
+    height: auto;
+    z-index: -5;
+    transition: all 0.8s cubic-bezier(0, 0.4, 0, 1.01);
+  }
+
+  .star-5 {
+    position: absolute;
+    top: 25%;
+    left: 5%;
+    width: 15px;
+    height: auto;
+    z-index: -5;
+    transition: all 0.6s cubic-bezier(0, 0.4, 0, 1.01);
+  }
+
+  .star-6 {
+    position: absolute;
+    top: 5%;
+    left: 20%;
+    width: 5px;
+    height: auto;
+    z-index: -5;
+    transition: all 0.8s ease;
+  }
+
+  .b:hover {
+    background: transparent;
+    color: #4c83fa;
+    box-shadow: 0 0 0px #4c83fa;
+  }
+
+  .b:hover .star-1 {
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 25px;
+    height: auto;
+    z-index: 2;
+  }
+
+  .b:hover .star-2 {
+    position: absolute;
+    top: -0%;
+    left: 10%;
+    width: 15px;
+    height: auto;
+    z-index: 2;
+  }
+
+  .b:hover .star-3 {
+    position: absolute;
+    top: 55%;
+    left: 25%;
+    width: 5px;
+    height: auto;
+    z-index: 2;
+  }
+
+  .b:hover .star-4 {
+    position: absolute;
+    top: 30%;
+    left: 80%;
+    width: 8px;
+    height: auto;
+    z-index: 2;
+  }
+
+  .b:hover .star-5 {
+    position: absolute;
+    top: 25%;
+    left: 115%;
+    width: 15px;
+    height: auto;
+    z-index: 2;
+  }
+
+  .b:hover .star-6 {
+    position: absolute;
+    top: 5%;
+    left: 60%;
+    width: 5px;
+    height: auto;
+    z-index: 2;
+  }
+
+  .fil0 {
+    fill: #fcff4a;
+  }
+
+  .domain-title {
+    background-color: #ffffff;
+    /* Set desired background color */
+    color: rgb(0, 0, 0);
+    /* Text color */
+    padding: 20px 10px;
+    /* Add some padding for better appearance */
+    width: 100%;
+    margin-bottom: -47px;
+    text-align: center;
+    border-radius: 8px;
+    /* Center align text */
+  }
+
+  /* Optional: If you want fixed dimensions instead */
+  .domain-image {
+    width: 100px;
+    /* Set desired width */
+    height: 100px;
+    /* Set desired height */
+    object-fit: cover;
+    /* Optional, if you want to fill a specific area without distortion */
+  }
+
+  .card-front img {
+    margin-bottom: 35px;
+    /* Add space below the image */
+  }
+
+  .domains-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    max-height: 610px;
+    /* Set a maximum height */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+  }
+
+
+  .domain-item {
+    flex: 1 1 20%;
+    /* Each card will take up approximately 20% of the container width */
+    margin: 15px;
+    /* Space between cards */
+    min-width: 200px;
+    /* Optional: Set a maximum width for each card */
+  }
+
+  .card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    height: 250px;
+    /* Adjust height as needed */
+    position: relative;
+    perspective: 1000px;
+  }
+
+  .card-front,
+  .card-back {
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border: 1px solid #ccc;
+    /* Optional border */
+    border-radius: 10px;
+    /* Optional rounded corners */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.6s;
+    /* Smooth transition */
+  }
+
+  .card-front {
+    background: linear-gradient(180deg, #7F56D9, #a2c4ff);
+    /* Front background color */
+  }
+
+  .card-back {
+    background: linear-gradient(90deg, #083F9B, #7F56D9);
+    transform: rotateY(180deg);
+  }
+
+  .card-back p {
+    font-size: 16px;
+    /* Increase font size */
+    line-height: 1.5;
+    /* Improve line spacing */
+    padding: 20px;
+    /* Add padding for better spacing */
+    text-align: center;
+    /* Center align text */
+    color: #ffffff;
+  }
+
+  .card:hover .card-front {
+    transform: rotateY(180deg);
+  }
+
+  .card:hover .card-back {
+    transform: rotateY(360deg);
+  }
+
+  /* Click effect for flipping on click instead of hover */
+  .card.flipped .card-front {
+    transform: rotateY(180deg);
+  }
+
+  .card.flipped .card-back {
+    transform: rotateY(360deg);
+  }
+
+  /* For WebKit browsers (Chrome, Safari) */
+  .domains-list::-webkit-scrollbar {
+    display: none;
+    /* Hide the scrollbar */
+  }
+
+
+
+  /* Job Details Styles */
+  .job-details-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+  }
+
+  /* Ensure the jobs list is scrollable */
+  .jobs-list {
+    list-style: none;
+    display: grid;
+    gap: 1rem;
+    height: 600px;
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+  }
+
+  .job-item {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .job-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .job-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+
+    /* Adjust width to fit better within the container */
+    min-width: 525px;
+    /* Set a maximum width to ensure it fits */
+    margin: auto;
+    /* Center the job card within its item */
+  }
+
+  .job-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .job-icon {
+    font-size: 1.5rem;
+    background-image: linear-gradient(180deg, #083F9B, #7F56D9);
+    /* Set gradient background */
+    -webkit-background-clip: text;
+    /* Clip background to text */
+    -webkit-text-fill-color: transparent;
+    /* Make text color transparent */
+    background-clip: text;
+    /* For non-WebKit browsers */
+    text-emphasis-color: transparent;
+    /* For non-WebKit browsers */
+  }
+
+
+  .job-info {
+    flex-grow: 1;
+    /* Allow info to grow and fill space */
+  }
+
+  .job-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+    /* Space below title */
+    background-image: linear-gradient(90deg, #083F9B, #7F56D9);
+    /* Set gradient background */
+    -webkit-background-clip: text;
+    /* Clip background to text */
+    -webkit-text-fill-color: transparent;
+    /* Make text color transparent */
+    background-clip: text;
+    /* For non-WebKit browsers */
+    text-emphasis-color: transparent;
+    /* For non-WebKit browsers */
+  }
+
+
+  .job-domain {
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  /* For WebKit browsers (Chrome, Safari) */
+  .jobs-list::-webkit-scrollbar {
+    display: none;
+    /* Hide the scrollbar */
+  }
+
+
+  .details-list {
+    list-style: none;
+  }
+
+  .detail-item {
+    display: flex;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e1e8ed;
+  }
+
+  .detail-item:last-child {
+    border-bottom: none;
+  }
+
+  .detail-label {
+    font-weight: 600;
+    color: #2b4162;
+    width: 200px;
+    flex-shrink: 0;
+  }
+
+  .detail-value {
+    color: #666;
+    flex-grow: 1;
+  }
+
+  .topics-container {
+    
+    display: grid;
+    margin-top: 20px;
+    height: 600px;
+    overflow-y: auto;
+  }
+  .gradient-text {
+    background-image: linear-gradient(90deg, #083F9B, #7F56D9); /* Gradient from #4c83fa to #7F56D9 */
+    background-size: 100%; /* Ensure the gradient covers the text */
+    -webkit-background-clip: text; /* Clip the background to the text */
+    -moz-background-clip: text; /* For Firefox */
+    color: transparent; /* Make the text color transparent */
+}
+
+
+
+
+  .subtopics-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 15px; /* Adjust this value as needed */
+    padding-bottom: 40px;
+}
+
+  .subtopic-box {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 25px; /* Set the desired border radius */
+    border: 3px solid transparent; /* Transparent border */
+    background: linear-gradient(white, white) padding-box, /* Background for content */
+                linear-gradient(to right,#083F9B, #7F56D9) border-box; /* Gradient for the border */
+    text-align: center; /* Center text inside boxes */
+    min-width: 100px; /* Minimum width for each box */
+}
+
+  .topics-container::-webkit-scrollbar {
+    display: none;
+    /* Hide the scrollbar */
+  }
+
+  .subtopic-box a {
+    text-decoration: none; /* Remove underline */
+    color: #1b1d21; /* Set your desired color for the links */
+}
+
+.subtopic-box a:hover,
+.subtopic-box a:focus,
+.subtopic-box a:active {
+    color: #7F56D9; /* Change this to your desired hover color */
+}
+

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Learning Roadmap</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index3.css') }}">
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const phases = document.querySelectorAll('.phase');
+            phases.forEach(phase => {
+                const phaseHeader = phase.querySelector('h2');
+                const phaseStars = phaseHeader.querySelector('.phase-stars');
+                const phaseCheckbox = phase.querySelector('label.custom-checkbox input');
+                const phaseProgressBar = phase.querySelector('.phase-progress');
+                const topics = phase.querySelectorAll('.topic');
+                const subtopicCheckboxes = phase.querySelectorAll('.subtopic input[type="checkbox"]');
+        
+                // Prevent manual checking of phase and topic checkboxes
+                phaseCheckbox.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // Toggle topics display
+                    const topicsElement = phase.querySelector('.topics');
+                    topicsElement.style.display = topicsElement.style.display === 'none' ? 'block' : 'none';
+                });
+        
+                topics.forEach(topic => {
+                    const topicHeader = topic.querySelector('h3');
+                    const topicCheckbox = topic.querySelector('label.custom-checkbox input');
+                    
+                    // Prevent manual checking of topic checkboxes
+                    topicCheckbox.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        // Toggle subtopics display
+                        const subtopicsElement = topic.querySelector('.subtopics');
+                        subtopicsElement.style.display = subtopicsElement.style.display === 'none' ? 'block' : 'none';
+                    });
+                });
+        
+                // Update topic progress bar and star rating
+                const updateTopicProgress = (topic) => {
+                    const subtopics = topic.querySelectorAll('.subtopic input[type="checkbox"]');
+                    const topicProgressBar = topic.querySelector('.topic-progress');
+                    const topicCheckbox = topic.querySelector('label.custom-checkbox input');
+        
+                    if (subtopics.length > 0) {
+                        const checkedSubtopics = Array.from(subtopics).filter(cb => cb.checked).length;
+                        const progressPercentage = (checkedSubtopics / subtopics.length) * 100;
+                        topicProgressBar.style.width = `${progressPercentage}%`;
+        
+                        // Automatically mark topic checkbox if all subtopics are checked
+                        topicCheckbox.checked = checkedSubtopics === subtopics.length;
+                    }
+                };
+        
+                // Update phase progress bar and star rating
+                const updatePhaseProgress = () => {
+                    const allSubtopicCheckboxes = Array.from(phase.querySelectorAll('.subtopic input[type="checkbox"]'));
+                    const allTopicCheckboxes = Array.from(phase.querySelectorAll('.topic label.custom-checkbox input'));
+                    const allTopics = phase.querySelectorAll('.topic');
+                    const checkedSubtopics = allSubtopicCheckboxes.filter(cb => cb.checked).length;
+                    const progressPercentage = (checkedSubtopics / allSubtopicCheckboxes.length) * 100;
+                    
+                    // Update progress bar
+                    phaseProgressBar.style.width = `${progressPercentage}%`;
+        
+                    // Automatically mark phase checkbox if all topic subtopics are checked
+                    phaseCheckbox.checked = allSubtopicCheckboxes.every(cb => cb.checked);
+        
+                    // Update star rating
+                    const completedTopics = Array.from(allTopics).filter(topic => 
+                        Array.from(topic.querySelectorAll('.subtopic input[type="checkbox"]')).every(cb => cb.checked)
+                    ).length;
+        
+                    const stars = phaseStars.querySelectorAll('.star');
+                    stars.forEach((star, index) => {
+                        if (index < completedTopics) {
+                            star.classList.add('filled');
+                        } else {
+                            star.classList.remove('filled');
+                        }
+                    });
+                };
+        
+                // Attach event listeners to subtopic checkboxes
+                subtopicCheckboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', () => {
+                        const topic = checkbox.closest('.topic');
+                        updateTopicProgress(topic);
+                        updatePhaseProgress();
+                    });
+                });
+        
+                // Toggle topic subtopics
+                topics.forEach(topic => {
+                    const topicHeader = topic.querySelector('h3');
+                    topicHeader.addEventListener('click', (e) => {
+                        // Prevent toggle if clicking on checkbox
+                        if (e.target.closest('.custom-checkbox')) return;
+                        
+                        const subtopicsElement = topic.querySelector('.subtopics');
+                        subtopicsElement.style.display = subtopicsElement.style.display === 'none' ? 'block' : 'none';
+                    });
+                });
+        
+                // Toggle phase display
+                phaseHeader.addEventListener('click', (e) => {
+                    // Prevent toggle if clicking on checkbox or stars
+                    if (e.target.closest('.custom-checkbox') || e.target.closest('.phase-stars')) return;
+                    
+                    const topicsElement = phase.querySelector('.topics');
+                    topicsElement.style.display = topicsElement.style.display === 'none' ? 'block' : 'none';
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="main-container">
+        <div class="container">
+        {% for phase, topics in content.items() %}
+        <div class="phase">
+            <h2>
+                <label class="custom-checkbox">
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                    {{ phase }}
+                </label>
+                <div class="phase-stars">
+                    {% for _ in range(topics|length) %}
+                    <i class="star fas fa-star"></i>
+                    {% endfor %}
+                </div>
+                <div class="phase-progress"></div>
+            </h2>
+            <div class="topics">
+                {% for topic, details in topics.items() %}
+                <div class="topic" id="{{ topic | replace(' ', '_') }}">
+                    <h3>
+                        <label class="custom-checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                            {{ topic }}
+                        </label>
+                        <div class="topic-progress"></div>
+                    </h3>
+                    <div class="key-learning-points">
+                        {{ details['Key Learning Points'] }}
+                    </div>
+                    <div id="{{ topic | replace(' ', '_') }}_subtopics" class="subtopics" style="display: none;">
+                        {% for subtopic in details['Subtopics'] %}
+                        <div class="subtopic">
+                            <input type="checkbox">
+                            {{ subtopic }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    </div>
+</body>
+</html>
